@@ -16,21 +16,13 @@ export class HomePage {
     this.locationDialog = this.loadingCtrl.create({
       content: 'Checking for your location...'
     });
-    
-    if ( this.platform.is('cordova') ) {
-      console.log(this.get_saved_location());
-    }
-  }
-
-  async get_saved_location() {
-    const value = <Object> await this.nativeStorage.getItem('location');
   }
 
   ionViewDidLoad() {
 
     this.locationDialog.present();
 
-    this.geolocation.getCurrentPosition().then((resp) => {
+    let getWeather = (resp) : any => {
 
       this.locationDialog.dismiss();
       this.weather.setLocation(resp.coords);
@@ -40,10 +32,19 @@ export class HomePage {
         console.log(data);
       });
 
-    }).catch((error) => {
-      console.log('Error getting location: ', error);
-      this.locationDialog.dismiss();
-    });
+    };
+
+    if ( this.platform.is('cordova') ) {
+      this.nativeStorage.getItem('location').then(
+        data => getWeather(data),
+        error => console.log('Error getting location from storage: ' + error)
+      );
+    } else {
+      this.geolocation.getCurrentPosition().then(getWeather).catch((error) => {
+        console.log('Error getting location: ', error);
+        this.locationDialog.dismiss();
+      });
+    }
 
   }
 
