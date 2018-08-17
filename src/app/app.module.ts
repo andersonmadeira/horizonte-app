@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClientModule } from '@angular/common/http';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { AppConfig } from '../config/app-config';
 
@@ -35,6 +36,7 @@ import { WeatherProvider } from '../providers/weather/weather';
     Geolocation,
     AppConfig,
     WeatherProvider,
+    NativeStorage,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

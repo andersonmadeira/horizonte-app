@@ -84,4 +84,5 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="We need to know where you are to get weather forecast for your location" />
     </plugin>
+    <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
 </widget>
