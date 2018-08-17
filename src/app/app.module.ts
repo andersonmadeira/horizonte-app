@@ -3,9 +3,12 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Geolocation } from '@ionic-native/geolocation';
+import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { AppConfig } from '../config/app-config';
 
 @NgModule({
   declarations: [
@@ -14,6 +17,7 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -24,6 +28,8 @@ import { HomePage } from '../pages/home/home';
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
+    AppConfig,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
