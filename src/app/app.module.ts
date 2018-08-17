@@ -4,11 +4,15 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppConfig } from '../config/app-config';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { AppConfig } from '../config/app-config';
+
+import { WeatherProvider } from '../providers/weather/weather';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +21,7 @@ import { AppConfig } from '../config/app-config';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -30,7 +34,8 @@ import { AppConfig } from '../config/app-config';
     SplashScreen,
     Geolocation,
     AppConfig,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    WeatherProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}
