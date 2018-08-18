@@ -7,7 +7,6 @@ import { AppConfig } from '../../config/app-config';
 
 @Injectable()
 export class WeatherProvider {
-  private weatherInfo: Observable<any>;
   private apiUrl = 'http://api.openweathermap.org/data/2.5/';
   private weatherDialog: Loading;
   private finalUrl: string;
@@ -30,12 +29,24 @@ export class WeatherProvider {
     let observable = this.http.get(this.finalUrl);
 
     observable.subscribe(data => {
-      console.log('Inner subscribe');
-      console.log(data);
+      this.weatherDialog.dismiss();
+    }, error => {
       this.weatherDialog.dismiss();
     });
 
     return observable;
+  }
+
+  getIconCode(conditionCode: String) {
+    switch ( conditionCode.toLowerCase() ) {
+      case 'thunderstorm': return 'thunderstorm';
+      case 'drizzle': return 'rainy';
+      case 'rain': return 'rainy';
+      case 'snow': return 'snow';
+      case 'atmosphere': return 'cloud';
+      case 'clear': return 'sunny';
+      case 'clouds': return 'cloud';
+    }
   }
 
 }
